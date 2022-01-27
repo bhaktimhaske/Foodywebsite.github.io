@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
+*{
+   margin:0;
+padding:0;
+box-sizing:border-box;
+outline:none;
+font-family: 'Josefin Sans', sans-serif;
+ }
+
+body{
+      background:#494638;
+    }
+
+.wrapper{
+  position: absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+max-width: 350px;
+width:100%;
+background: #fff;
+padding:25px;
+border-radius:5px;
+box-shadow:4px 4px 2px rgba(254,236,164,1);
+}
+
+.wrapper h2{
+text-align:center;
+margin-bottom:20px;
+text-transform:uppercase;
+letter-spacing:3px;
+color:#332902;
+}
+
+.wrapper .input_field{
+margin-bottom: 10px;
+}
+
+.wrapper .input_field input[type="text"],
+.wrapper textarea{
+width:100%;
+border: 1px solid #e0e0e0;
+padding:10px;
+}
+
+.wrapper textarea{
+height: 80px;
+resize:none;
+}
+
+.wrapper .btn input[type="submit"]{
+border:0;
+margin-top:15px;
+padding:10px;
+width: 100%;
+background: #fece0c;
+color: #332902;
+text-transform: uppercase;
+letter-spacing:5px;
+font-weight: bold;
+border-radius: 25px;
+cursor:pointer;
+}
+
+.wrapper #error_message{
+margin-bottom: 20px;
+padding: 0px;
+background: #fe8b8e;
+text-align: center;
+font-size:14px;
+transition: all 0.5s ease;
+}

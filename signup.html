@@ -1,0 +1,172 @@
+<?php
+require_once "db.php";
+
+if (isset($_POST['signup'])) {
+$name = real_escape_string($conn, $_POST['name']);
+$email = real_escape_string($conn, $_POST['email']);
+$mobile = real_escape_string($conn, $_POST['mobile']);
+$password = real_escape_string($conn, $_POST['password']);
+$cpassword = real_escape_string($conn, $_POST['cpassword']); 
+
+if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
+$name_error = "Name must contain only alphabets and space";
+}
+
+if(!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+$email_error = "Please Enter Valid Email ID";
+}
+
+if(strlen($password) < 6) {
+$password_error = "Password must be minimum of 6 characters";
+}       
+
+if(strlen($mobile) < 10) {
+$mobile_error = "Mobile number must be minimum of 10 characters";
+}
+
+if($password != $cpassword) {
+$cpassword_error = "Password and Confirm Password doesn't match";
+}
+
+if (!$error) {
+if(query($conn, "INSERT INTO users(name, email, mobile ,password) VALUES('" . $name . "', '" . $email . "', '" . $mobile . "', '" . md5($password) . "')")) {
+header("location: registration.php");
+exit();
+} else {
+echo "Error: " . $sql . "" . mysqli_error($conn);
+}
+}
+close($conn);
+}
+?>
+
+<!DOCTYPE html>
+<head>
+<center>
+<br></br><br></br><br></br>
+<title>SIGN UP</title>
+</head>
+
+<style>
+body{
+
+background-image:url("img/a.jpg");
+
+background-repeat: no-repeat;
+/* background-atttchment:fixed; */
+
+background-size:200% 200%;
+
+}
+h1{
+            text-align: center;
+         text-decoration-color: white;
+         color:midnightblue;
+         text-size-adjust: 100;
+	
+}
+
+.b {
+        background-color:blue;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: right;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 4px;
+        cursor: pointer;
+      }
+
+</style>
+
+
+
+<body >
+
+<table>
+<h1><b><font size="15" color="darkblue">Signup Form</b></h1></font></h1> 
+
+
+<p>Please fill all fields in the form</p>
+
+<form action="thank.html">
+
+<tr>
+<td>
+<font size="6" color="black">
+<label>Name</label>
+
+<td>
+<input type="text" name="name" class="form-control" value="" maxlength="50" placeholder="Megha"
+required=""><span class="text-danger">
+<?php if (isset($name_error)) echo $name_error; ?>
+<br></br>
+</td>
+</td>
+</tr>
+
+<tr>
+<td>
+<font size="6" color="black">
+<label>Email</label>
+<td>
+<input type="email" name="email" class="form-control" value="" maxlength="30" placeholder="megha.mule@cumminscollege.in" required="">
+<span class="text-danger">
+<?php if (isset($email_error)) echo $email_error; ?>
+<br></br>
+</td>
+
+</td>
+</tr>
+
+<tr>
+<td>
+<font size="6" color="black">
+<label>Mobile</label>
+<td>
+<input type="text" name="mobile" class="form-control" value="" maxlength="12" placeholder="9643221111" required="">
+<span class="text-danger">
+<?php if (isset($mobile_error)) echo $mobile_error; ?>
+<br></br>
+</td>
+
+</td>
+</tr>
+
+<tr>
+<td>
+<font size="6" color="black">
+<label>Password</label>
+<td>
+<input type="password" name="password" class="form-control" value="" maxlength="8"  required="">
+<span class="text-danger">
+<?php if (isset($password_error)) echo $password_error; ?>
+<br></br>
+</td>
+
+</td>
+</tr> 
+
+<tr>
+<td>
+<font size="6" color="black">
+<label>Confirm Password</label>
+<td>
+<input type="password" name="cpassword" class="form-control" value="" maxlength="8" required="">
+<span class="text-danger">
+<?php if (isset($cpassword_error)) echo $cpassword_error; ?>
+</td>
+
+</td>
+</tr>
+
+</table>
+<br></br>
+ <p><a href="thank.html" class="b">Submit</a>
+
+</form>
+</center>
+</body>
+</html>
